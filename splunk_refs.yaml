@@ -3,3 +3,8 @@ docker run --name splunk -d -p 8000:8000 -e SPLUNK_START_ARGS=--accept-license -
 
 #mount volumes for persistent data
 docker run --name splunk-mount -v opt-splunk-etc:/opt/splunk/etc -v opt-splunk-var:/opt/splunk/var -d -p 8000:8000 -e SPLUNK_START_ARGS=--accept-license -e SPLUNK_PASSWORD=password splunk/splunk:latest
+
+#query via location
+source="secure.log" action=failure | iplocation src | geostats count by Country
+
+SPL = Splunk Processing Language
